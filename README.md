@@ -16,6 +16,11 @@ Así mismo también podrás generar un pdf como este:
 
 Te invito a descargar el proyecto y comprobar por ti mismo las funcionalidades, si te instalas opencode puedes usar el modelo de big pickle de manera completamente gratuita. 
 
+## Esquema de como entendí el proyecto
+
+<img width="813" height="701" alt="imagen" src="https://github.com/user-attachments/assets/07f564e0-627d-4e4a-b8e0-47d59d2c0a71" />
+
+
 ## Requisitos
 
 - **Python 3.10+** (probado con 3.12)
