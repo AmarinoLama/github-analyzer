@@ -6,6 +6,14 @@ Tienes varias opciones para analizar/preguntar/pdfs sobre el proyecto, como no l
 
 <img width="1262" height="357" alt="imagen" src="https://github.com/user-attachments/assets/0917de2f-c10c-4f41-a0f4-c080825d40fc" />
 
+Para interactuar primero deberás analizar el proyecto luego podrás hacer cualquier pregunta en la opción 2:
+
+<img width="632" height="510" alt="imagen" src="https://github.com/user-attachments/assets/3ed2b712-c820-4d7a-b729-57ab3f5551a2" />
+
+Así mismo también podrás generar un pdf:
+
+
+
 ## Requisitos
 
 - **Python 3.10+** (probado con 3.12)
