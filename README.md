@@ -1,25 +1,10 @@
-# AI Code Analyzer
+# github-analyzer
 
-Herramienta de consola que analiza un repositorio público de GitHub y permite
-**hacer preguntas sobre su código** (RAG) y **generar un informe técnico en PDF**.
-Está pensada como proyecto de portfolio para demostrar **LangChain, LangGraph,
-RAG y la integración de un LLM a través de OpenCode Server**.
+Este pequeño proyecto lo he creado para investigar y aprender como funciona langchan y langgraph. Después de una profunda conversación con Chatgpt ha surgido esta idea, un analizador de proyectos de github, la lógica es sencilla, le pasas un proyecto y el resto es todo seguir las instrucciones. 
 
-```text
-URL de GitHub
-     │
-     ▼
-Analizar repositorio (git clone + lectura + filtrado)   ← Python puro
-     │
-     ▼
-Indexar código (chunks + embeddings + vector store)    ← LangChain
-     │
-     ├─► Preguntar (retriever + contexto + LLM)          ← RAG
-     │
-     └─► Análisis completo (Semgrep + LLM) ──► PDF       ← informe
-```
+Tienes varias opciones para analizar/preguntar/pdfs sobre el proyecto, como no langraph se encarga de orquestar todo esto con una lista de posibles casos. En la siguiente imagen se aprecian las opciones:
 
----
+
 
 ## Requisitos
 
@@ -128,27 +113,6 @@ OpenCode Server→ proporciona acceso al modelo (API HTTP local)
 LLM           → comprende, razona y genera respuestas
 ```
 
-### ¿Qué hace cada módulo?
-
-```
-main.py                      → punto de entrada
-ai_code_analyzer/
-  config.py                  → ajustes desde variables de entorno
-  runtime.py                 → contexto de larga vida (LLM, vector store...)
-  llm.py                     → OpenCodeLLM (BaseChatModel sobre OpenCode Server)
-  embeddings.py              → embeddings (HuggingFace o fallback de hashing)
-  repo.py                    → clone, lectura, filtrado, tecnologías (sin IA)
-  indexing.py                → chunking + vector store
-  rag.py                     → retriever + prompt + respuesta
-  analysis.py                → Semgrep + explicación con LLM
-  report.py                  → generación del PDF
-  cli.py                     → menú interactivo
-  graph/
-    state.py                 → AnalyzerState (estado de LangGraph)
-    nodes.py                 → funciones que actúan como nodos
-    workflows.py             → ensamblado de los grafos
-```
-
 ### Los tres grafos de LangGraph
 
 | Grafo | Flujo | Cuándo se ejecuta |
@@ -194,59 +158,3 @@ En lugar de enviar todo el repositorio en cada pregunta:
 Las fuentes se muestran al usuario para que la respuesta sea verificable.
 
 ---
-
-## Guía de estudio (preguntas de entrevista)
-
-- **¿Qué es LangChain?** Un framework que proporciona piezas para construir
-  aplicaciones con LLMs: prompts, modelos, embeddings, vector stores,
-  retrievers y cadenas. En este proyecto es la capa de *componentes*.
-- **¿Qué es LangGraph?** Una librería para definir *flujos* con nodos y
-  transiciones sobre un estado compartido. Aquí orquesta el pipeline.
-- **¿Diferencia entre LangChain y LangGraph?** LangChain da las piezas;
-  LangGraph organiza **cómo y en qué orden** se ejecutan (el grafo).
-- **¿Qué es un nodo?** Una función Python que recibe el estado y devuelve una
-  actualización del mismo (p. ej. `clone`, `chunk`, `retrieve`).
-- **¿Qué es un estado?** El diccionario tipado (`AnalyzerState`) que fluye entre
-  nodos. Cada nodo lee lo que necesita y devuelve lo que cambia.
-- **¿Cómo funciona un flujo?** `StateGraph` declara nodos y aristas; `compile()`
-  genera un ejecutable y `invoke()` lo recorre pasando el estado.
-- **¿Qué es RAG?** *Retrieval-Augmented Generation*: recuperar fragmentos
-  relevantes y pasárselos al LLM como contexto, en lugar de meterlo todo.
-- **¿Qué son los embeddings?** Vectores que representan el significado de un
-  texto; textos parecidos → vectores cercanos.
-- **¿Qué es un vector store?** Base de datos que guarda vectores y permite
-  buscar por similitud.
-- **¿Qué hace un retriever?** Dado un texto, devuelve los documentos más
-  similares del vector store.
-- **¿Cómo se conecta un LLM?** Implementando `BaseChatModel` (ver `llm.py`);
-  aquí se traduce a la API HTTP de OpenCode Server.
-- **¿Cómo se integra Semgrep?** Mediante `subprocess` (Python), no con el LLM;
-  el LLM solo *explica* los resultados ya obtenidos.
-
----
-
-## Pruebas
-
-Las pruebas no requieren red, OpenCode Server ni descargas de modelos:
-
-```bash
-# Pipeline completo (indexación → RAG → análisis → PDF) con LLM simulado
-python -m tests.test_smoke
-
-# Contrato HTTP del wrapper OpenCodeLLM (API simulada con unittest.mock)
-python -m tests.test_llm
-```
-
----
-
-## Limitaciones y próximos pasos
-
-- El vector store vive en memoria; para repositorios grandes conviene FAISS o
-  Chroma con persistencia.
-- Los embeddings por defecto (hashing) son un fallback sin semántica real;
-  instala `requirements-optional.txt` para usar sentence-transformers.
-- Los flujos de LangGraph son fijos. Una evolución natural es un **agente**
-  donde el LLM decida qué herramientas invocar (por ejemplo con
-  `create_react_agent`).
-- Se podría añadir una interfaz gráfica (PyQt6) y exportar el historial de
-  preguntas.
