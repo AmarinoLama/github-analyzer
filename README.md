@@ -4,7 +4,7 @@ Este pequeño proyecto lo he creado para investigar y aprender como funciona lan
 
 Tienes varias opciones para analizar/preguntar/pdfs sobre el proyecto, como no langraph se encarga de orquestar todo esto con una lista de posibles casos. En la siguiente imagen se aprecian las opciones:
 
-
+<img width="1262" height="357" alt="imagen" src="https://github.com/user-attachments/assets/0917de2f-c10c-4f41-a0f4-c080825d40fc" />
 
 ## Requisitos
 
