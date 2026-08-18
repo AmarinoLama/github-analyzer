@@ -10,9 +10,11 @@ Para interactuar primero deberás analizar el proyecto luego podrás hacer cualq
 
 <img width="632" height="510" alt="imagen" src="https://github.com/user-attachments/assets/3ed2b712-c820-4d7a-b729-57ab3f5551a2" />
 
-Así mismo también podrás generar un pdf:
+Así mismo también podrás generar un pdf como este:
 
+<img width="821" height="895" alt="imagen" src="https://github.com/user-attachments/assets/4364d8e4-e2c2-41e3-81ad-8f28af499c7c" />
 
+Te invito a descargar el proyecto y comprobar por ti mismo las funcionalidades, si te instalas opencode puedes usar el modelo de big pickle de manera completamente gratuita. 
 
 ## Requisitos
 
@@ -74,38 +76,6 @@ Variables principales:
 | `HF_MODEL_NAME` | Modelo de sentence-transformers para embeddings |
 | `CHUNK_SIZE` / `CHUNK_OVERLAP` | Tamaño/solape de los chunks |
 | `RETRIEVAL_K` | Nº de fragmentos recuperados por pregunta |
-
----
-
-## Uso
-
-```bash
-python main.py
-```
-
-```text
-================================
-       AI CODE ANALYZER
-================================
-
-Introduce la URL del repositorio:
-> https://github.com/usuario/proyecto
-
-[1] Analizar repositorio
-[2] Hacer preguntas
-[3] Análisis completo
-[4] Generar informe PDF
-[5] Salir
-```
-
-1. **Analizar repositorio**: clona, filtra, trocea e indexa el código.
-2. **Hacer preguntas**: chat RAG sobre el código indexado (`salir` para volver).
-3. **Análisis completo**: ejecuta Semgrep y el LLM explica los hallazgos.
-4. **Generar informe PDF**: crea `reports/<proyecto>-analysis.pdf`.
-5. **Salir**.
-
-> En consolas Windows antiguas, si los caracteres `✓` o las tildes se ven mal,
-> ejecuta primero `chcp 65001`.
 
 ---
 
