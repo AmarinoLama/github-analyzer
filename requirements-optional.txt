@@ -1,0 +1,9 @@
+# --- Embeddings semánticos reales (recomendado) ---
+# Descarga un modelo pequeño la primera vez. Sin estas dependencias la app
+# usa un fallback de hashing en Python puro (ver README).
+langchain-huggingface>=0.1
+sentence-transformers>=3.0
+
+# --- Análisis estático de seguridad ---
+# Sin semgrep la app usa un escáner heurístico propio como fallback.
+semgrep>=1.80

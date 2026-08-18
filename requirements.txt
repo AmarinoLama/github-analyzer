@@ -1,0 +1,15 @@
+# --- Núcleo LangChain / LangGraph ---
+langchain>=0.3
+langchain-core>=0.3
+langchain-text-splitters>=0.3
+langgraph>=0.2
+
+# --- Comunicación con OpenCode Server ---
+requests>=2.31
+
+# --- Utilidades ---
+python-dotenv>=1.0
+numpy>=1.26
+
+# --- Generación de PDF ---
+reportlab>=4.0
